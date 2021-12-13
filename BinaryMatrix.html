@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="utf-8">
 <style>
 
 * {
@@ -67,6 +69,7 @@ button {
 }
 
 </style>
+</head>
 
 <div id="main">
   <div id="editor">
@@ -307,8 +310,15 @@ function loadSaves() {
   Object.keys(localStorage)
     .sort()
     .forEach(name => {
-      const matrix = JSON.parse(localStorage[name]);
-      if (!matrix) return;
+      let matrix;
+
+      try {
+        matrix = JSON.parse(localStorage[name]);
+        if (!matrix) return;
+      }
+      catch(err) {
+        return;
+      }
 
       const cont = document.createElement("div");
       cont.classList.add("preview");
