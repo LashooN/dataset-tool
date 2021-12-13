@@ -124,7 +124,7 @@ class Table {
   }
 
   setTile(x, y, newVal) {
-    this.matrix[Math.floor(y / this.tileSize)][Math.floor(x / this.tileSize)] = newVal;
+    this.matrix[Math.min(this.m - 1, Math.floor(y / this.tileSize))][Math.min(this.n - 1, Math.floor(x / this.tileSize))] = newVal;
     this.draw();
   }
 }
@@ -231,7 +231,6 @@ reset();
 
 function reset() {
   const emptyMatrix = [ ...new Array(m) ].map(() => [ ...new Array(n).fill(0) ]);
-  console.table(emptyMatrix);
   load(emptyMatrix, document.querySelector("#name").value);
 }
 
