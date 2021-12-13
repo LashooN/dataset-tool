@@ -96,20 +96,20 @@ button {
 class Table {
   constructor(matrix, tileSize, canvas) {
     this.matrix = matrix;
-    this.m = matrix[0].length;
-    this.n = matrix.length;
+    this.m = matrix.length;
+    this.n = matrix[0].length;
     this.tileSize = tileSize;
     this.canvas = canvas;
-    this.canvas.width = tileSize * this.m;
-    this.canvas.height = tileSize * this.n;
+    this.canvas.height = tileSize * this.m;
+    this.canvas.width = tileSize * this.n;
     this.ctx = canvas.getContext("2d");
   }
 
   draw() {
     this.ctx.strokeStyle = "green";
     this.ctx.lineWidth = this.tileSize / 10;
-    for (let y = 0; y < this.n; y++) {
-      for (let x = 0; x < this.m; x++) {
+    for (let y = 0; y < this.m; y++) {
+      for (let x = 0; x < this.n; x++) {
         if (this.matrix[y][x] === 1) this.ctx.fillStyle = "white";
         else this.ctx.fillStyle = "black";
         this.ctx.strokeRect(x * this.tileSize, y * this.tileSize, this.tileSize, this.tileSize);
@@ -230,7 +230,8 @@ const sleep = ms => new Promise(res => setTimeout(res, ms));
 reset();
 
 function reset() {
-  const emptyMatrix = [ ...new Array(n) ].map(() => [ ...new Array(m).fill(0) ]);
+  const emptyMatrix = [ ...new Array(m) ].map(() => [ ...new Array(n).fill(0) ]);
+  console.table(emptyMatrix);
   load(emptyMatrix, document.querySelector("#name").value);
 }
 
