@@ -314,7 +314,10 @@ function loadSaves() {
 
       try {
         matrix = JSON.parse(localStorage[name]);
-        if (!matrix) return;
+        if (!matrix ||
+            !Array.isArray(matrix) ||
+            matrix.length === 0 ||
+            !matrix.every(line => Array.isArray(line) && line.length > 0)) return;
       }
       catch(err) {
         return;
